@@ -1,3 +1,5 @@
+// netlify/functions/mockData.js
+
 // 用户数据
 const users = [
   {
@@ -157,8 +159,9 @@ const generateFeedItem = (id, type) => {
   };
 };
 
-// 生成内容流数据
-export const generateFeedData = (type, page, limit) => {
+// 生成内容流数据 - 将export修改为module.exports
+// 注意这里的修改，使用CommonJS模块导出
+module.exports.generateFeedData = (type, page, limit) => {
   const startIndex = (page - 1) * limit;
   const result = [];
 
