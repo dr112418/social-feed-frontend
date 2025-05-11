@@ -18,11 +18,6 @@ const props = defineProps({
 
 const route = useRoute()
 const currentType = computed(() => props.type || route.params.type || 'general')
-const tabs = [
-  { type: 'general', label: '综合' },
-  { type: 'travel', label: '旅行' },
-  { type: 'food', label: '美食' },
-]
 </script>
 
 <style scoped>

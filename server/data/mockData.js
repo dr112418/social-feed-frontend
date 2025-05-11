@@ -62,7 +62,7 @@ const generateTitle = (type) => {
     ' 氛围感的神在哪里呀？',
   ]
 
-  const travelTitles = [
+  const desktopTitles = [
     '《欧洲卡车模拟3》新手入门&车辆测评攻略合集',
     '【掘地求财】云游小贴士',
     '『再临』知道欧拉公式的威力吗小子#申请精华',
@@ -75,7 +75,7 @@ const generateTitle = (type) => {
     ' 如何一口气获得七位特殊僵尸？',
   ]
 
-  const foodTitles = [
+  const mobileTitles = [
     "【托卡美图】“你有点傻傻的但我乐意和你玩'·.:”#信先生",
     '《我的朋友佩德罗》1~36关无伤通关全流程',
     '【环樱】“有趣的灵魂终将会相遇”',
@@ -90,8 +90,8 @@ const generateTitle = (type) => {
 
   const titles = {
     general: generalTitles,
-    travel: travelTitles,
-    food: foodTitles,
+    desktop: desktopTitles,
+    mobile: mobileTitles,
   }
 
   const titleList = titles[type] || generalTitles

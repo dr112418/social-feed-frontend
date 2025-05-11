@@ -74,7 +74,7 @@ const onImageClick = (item) => {
 .feed-item {
   background-color: #fff;
   border-radius: 6px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
