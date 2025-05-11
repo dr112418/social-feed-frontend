@@ -100,7 +100,7 @@ const onRefresh = () => {
 
 <style scoped>
 .content-container {
-  padding: 8px;
+  padding: 4px;
   background-color: #f7f7f7;
 }
 
@@ -111,6 +111,6 @@ const onRefresh = () => {
 
 .waterfall-column {
   flex: 1;
-  padding: 0 4px;
+  padding: 0 2px;
 }
 </style>

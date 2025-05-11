@@ -1,5 +1,15 @@
 import { createApp } from 'vue'
-import { Lazyload, List, PullRefresh, Toast } from 'vant'
+import {
+  Lazyload,
+  List,
+  PullRefresh,
+  Toast,
+  Image as VanImage,
+  Loading,
+  ImagePreview,
+  Icon,
+  Tag,
+} from 'vant'
 import 'vant/lib/index.css'
 
 import App from './App.vue'
@@ -14,6 +24,10 @@ app.use(Lazyload, {
 app.use(List)
 app.use(PullRefresh)
 app.use(Toast)
-
+app.use(VanImage)
+app.use(Loading)
+app.use(ImagePreview)
+app.use(Icon)
+app.use(Tag)
 app.use(router)
 app.mount('#app')

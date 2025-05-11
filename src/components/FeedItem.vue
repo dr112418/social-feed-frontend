@@ -1,34 +1,51 @@
 <template>
   <div class="feed-item">
-    <div class="user-info">
-      <img class="user-avatar" :src="item.user.avatar" alt="用户头像" />
-      <div class="user-name">{{ item.user.name }}</div>
-    </div>
-
-    <div class="feed-title">{{ item.title }}</div>
-
     <div class="feed-content">
       <template v-if="item.type === 'image'">
-        <img v-lazy="item.media" :alt="item.title" />
+        <van-image
+          class="feed-image"
+          lazy-load
+          :alt="item.title"
+          :src="item.media"
+          @click="onImageClick(item.media)"
+        >
+          <template v-slot:loading>
+            <van-loading type="spinner" size="20" />
+          </template>
+        </van-image>
       </template>
 
       <template v-else-if="item.type === 'video'">
         <VideoPlayer :src="item.media" />
       </template>
     </div>
+    <div class="feed-title">{{ item.title }}</div>
+    <div class="feed-forum">
+      <van-tag color="#F6F6F6" text-color="#666666" style="font-size: 11px">{{
+        item.forum
+      }}</van-tag>
+    </div>
 
-    <div class="feed-footer">
-      <div class="feed-time">{{ formatTime(item.timestamp) }}</div>
-      <div class="feed-stats">
-        <div class="stat-item">
-          <span>👍 {{ formatNumber(item.likes) }}</span>
-        </div>
-        <div class="stat-item">
-          <span>💬 {{ formatNumber(item.comments) }}</span>
-        </div>
-        <div class="stat-item" v-if="item.shares">
-          <span>↗️ {{ formatNumber(item.shares) }}</span>
-        </div>
+    <div class="user-info">
+      <view class="user-left">
+        <img class="user-avatar" :src="item.user.avatar" alt="用户头像" />
+        <div class="user-name">{{ item.user.name }}</div>
+      </view>
+
+      <div
+        class="user-right"
+        @click="
+          () => {
+            item.whether = !item.whether
+            item.likes += item.whether ? 1 : -1
+          }
+        "
+      >
+        <span style="font-size: 12px"
+          ><van-icon :name="item.whether ? 'good-job' : 'good-job-o'" style="margin-right: 5px" />{{
+            item.likes
+          }}</span
+        >
       </div>
     </div>
   </div>
@@ -37,6 +54,7 @@
 <script setup>
 import { defineProps } from 'vue'
 import VideoPlayer from './VideoPlayer.vue'
+import { showImagePreview } from 'vant'
 
 const props = defineProps({
   item: {
@@ -45,93 +63,65 @@ const props = defineProps({
   },
 })
 
-// 格式化时间
-const formatTime = (timestamp) => {
-  const date = new Date(timestamp)
-  const now = new Date()
-  const diff = now - date
-
-  if (diff < 60000) {
-    return '刚刚'
-  } else if (diff < 3600000) {
-    return `${Math.floor(diff / 60000)}分钟前`
-  } else if (diff < 86400000) {
-    return `${Math.floor(diff / 3600000)}小时前`
-  } else {
-    return `${Math.floor(diff / 86400000)}天前`
-  }
-}
-
-// 格式化数字
-const formatNumber = (num) => {
-  if (num >= 10000) {
-    return (num / 10000).toFixed(1) + 'w'
-  } else if (num >= 1000) {
-    return (num / 1000).toFixed(1) + 'k'
-  }
-  return num
+// 处理图片点击事件
+const onImageClick = (item) => {
+  // 这里可以添加图片点击后的处理逻辑，比如打开大图预览
+  showImagePreview([item])
 }
 </script>
 
 <style scoped>
 .feed-item {
   background-color: #fff;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  border-radius: 6px;
+  margin-bottom: 5px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-.user-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
-}
-
-.user-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-}
-
-.feed-title {
-  padding: 0 10px 8px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: #333;
-}
-
-.feed-content img {
+.feed-content .feed-image {
   width: 100%;
   display: block;
 }
 
-.feed-footer {
+.feed-title {
+  padding: 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #333;
+}
+
+.feed-forum {
+  padding-left: 6px;
+}
+
+.user-info {
+  width: 100%;
   display: flex;
+  align-items: center;
+  padding: 8px;
   justify-content: space-between;
-  padding: 10px;
-  font-size: 12px;
-  color: #999;
-  border-top: 1px solid #f5f5f5;
 }
 
-.feed-stats {
+.user-left {
   display: flex;
+  align-items: center;
+}
+.user-right {
+  color: #666;
+}
+.user-avatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 5px;
+  object-fit: cover;
 }
 
-.stat-item {
-  margin-left: 16px;
-}
-
-.stat-item:first-child {
-  margin-left: 0;
+.user-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
 }
 </style>
