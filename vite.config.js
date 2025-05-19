@@ -8,6 +8,14 @@ export default defineConfig({
     outDir: 'dist',
   },
   plugins: [vue()],
+  css: {
+    postcss: './postcss.config.js',
+    preprocessorOptions: {
+      css: {
+        charset: false,
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

@@ -21,9 +21,7 @@
     </div>
     <div class="feed-title">{{ item.title }}</div>
     <div class="feed-forum">
-      <van-tag color="#F6F6F6" text-color="#666666" style="font-size: 11px">{{
-        item.forum
-      }}</van-tag>
+      <van-tag color="#F6F6F6" text-color="#666666">{{ item.forum }}</van-tag>
     </div>
 
     <div class="user-info">
@@ -41,11 +39,7 @@
           }
         "
       >
-        <span style="font-size: 12px"
-          ><van-icon :name="item.whether ? 'good-job' : 'good-job-o'" style="margin-right: 5px" />{{
-            item.likes
-          }}</span
-        >
+        <span><van-icon :name="item.whether ? 'good-job' : 'good-job-o'" />{{ item.likes }}</span>
       </div>
     </div>
   </div>
@@ -95,6 +89,10 @@ const onImageClick = (item) => {
 .feed-forum {
   padding-left: 6px;
 }
+.feed-forum .van-tag {
+  font-size: 11px;
+  height: 16px;
+}
 
 .user-info {
   width: 100%;
@@ -110,6 +108,12 @@ const onImageClick = (item) => {
 }
 .user-right {
   color: #666;
+}
+.user-right span {
+  font-size: 12px;
+}
+.user-right .van-icon {
+  margin-right: 5px;
 }
 .user-avatar {
   width: 16px;

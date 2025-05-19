@@ -20,7 +20,6 @@ body {
 }
 
 .main-container {
-  max-width: 600px;
   margin: 0 auto;
 }
 </style>

@@ -1,0 +1,13 @@
+:root {
+  /* 基础颜色变量 */
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --text-color: #333;
+  /* 其他基础样式变量 */
+}
+
+/* 响应式断点 */
+@custom-media --small-viewport (max-width: 480px); /* 小屏手机 */
+@custom-media --medium-viewport (min-width: 481px) and (max-width: 768px); /* 大屏手机/小型折叠屏 */
+@custom-media --large-viewport (min-width: 769px) and (max-width: 1024px); /* 平板/展开的折叠屏 */
+@custom-media --extra-large-viewport (min-width: 1025px); /* 大型平板/桌面 */
